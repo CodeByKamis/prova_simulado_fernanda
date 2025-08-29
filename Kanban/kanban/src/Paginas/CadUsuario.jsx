@@ -2,32 +2,55 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-//validação de formulário 
+ 
+//validação de formulário
 const schemaCadUsuario = z.object({
     nome: z.string()
-        .min(1,'Insira ao máximo 1 caractere')
-        .max(100, 'Insira até 100 caracteres'),
-    email: z.string()
-        .min(3, 'Insira ao máximo 3 caracteres')
-        .max(100, 'Insira ao máximo 100 caracteres')
-        .email("Formato de email inválido"),
+        .min(1,'Insira ao menos 1 caractere')
+        .max(30, 'Insira até 30 caracteres'),
+    email:z.string()
+        .min(1, 'Insira seu email')
+        .max(30, 'Insira um endereço de email com até 30 carateres')
+        .email("Formato de email invalido"),
 })
-
+ 
+ 
 export function CadUsuario(){
+
+    const{
+        register,
+        handleSubmit,
+        formState:{ errors},
+        reset
+    }=useForm({
+        resolver: zodResolver(schemaCadUsuario)
+    });
+
+    async function obterdados(data){
+        console.log('dados informados pelo user: ', data)
+    
+        try{
+            await.axios.post("http://127.0.0.1:8000/usuario/");
+            alert("Usuário cadastrado com sucesso");
+            reset();
+        }catch(error){
+            alert("Algo deu errado, tente novamente");
+            console.log("Erros", error);
+        }
+    }
+
     return(
-        <form>
-            <h2>Cadastro de Usuário</h2>
-            <label>Nome: </label>
-            <input type="text" placeholder='Escreva o seu nome aqui' required/>
-
-
-            <label>E-mail: </label>
-            <input type="email" placeholder='Escreva o seu email aqui' required/>
-
+        <form className="formularios">
+            <h2>Cadastro do Usuário</h2>
+ 
+            <label>Nome:</label>
+            <input type='text' placeholder='Jose da Silva' required/>
+ 
+            <label>E-mail</label>
+            <input type='email' placeholder='email@email.com' required/>
+ 
             <button type='submit'>Cadastrar</button>
+ 
         </form>
-
-        
     )
 }
