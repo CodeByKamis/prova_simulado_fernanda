@@ -1,18 +1,48 @@
 @use './variaveis' as *;
-.main{
-    background-color: $backgrond;
+ 
+.formularios{
     max-width: 600px;
-    margin: 8px;
-    padding: 8px;
-    border-radius: 12px;
-    
+    margin: 20px;
+    padding: 10px;
+    background-color: $backgrond;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+   
+ 
     h2{
-        color: $accent;
-        font-size: $font-primary;
         text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
+        margin-bottom: 2px;
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        color:$primary;
     }
+   
+ 
+        label{
+            font-weight: bold;
+            color: $primary
+        }
+        input{
+            padding: 10px;
+            border: 1px solid $primary;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        button{
+            padding: 10px;
+            background-color: $accent;
+            color: $backgrond;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .errors{
+            font-size: 12px;
+            color:red;            
+        }
+ 
 }

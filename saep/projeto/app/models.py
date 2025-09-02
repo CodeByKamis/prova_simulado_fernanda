@@ -1,17 +1,16 @@
 from django.db import models
 
 class Usuario (models.Model):
-    ni = models.IntegerField(unique=True)
-    nome = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
+    nome = models.CharField(max_length=30)
+    email = models.CharField(max_length=30)
 
     def __str__(self):
         return self.nome
     
 class Tarefa (models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=255)
-    nomeSetor = models.CharField(max_length=100)
+    nome = models.CharField(max_length=30)
+    descricao = models.CharField(max_length=100)
+    nomeSetor = models.CharField(max_length=30)
     dataCadastro = models.DateField(auto_now_add=True)
     PRIORIDADE_CHOICES = [
         ('B', 'Baixa'),
